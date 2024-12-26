@@ -20,7 +20,7 @@ export default function toLt<Layer extends string>(
     return Object.fromEntries(
       Object.entries<unknown>(datum).map(([key, value]) => [
         key,
-        key === 'timestamp' ? value : lt(datum.timestamp, key, keys, data, linear, adjust),
+        key === 'timestamp' ? value : lt(datum.timestamp, key as Layer, keys, data, linear, adjust),
       ])
     ) as TimeDatum<Layer>
   })
