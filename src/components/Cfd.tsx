@@ -51,7 +51,7 @@ const Cfd = <Layer extends string>(props: PropsWithChildren<Props<Layer>>) => {
         .y0((d) => yScale(d[0]))
         .y1((d) => yScale(d[1]))
 
-      const xAxis = (g: d3.Selection<SVGGElement, unknown, null, undefined>) =>
+      const xAxis = (g: d3.Selection<SVGGElement, unknown, HTMLElement, never>) =>
         g.attr('transform', `translate(0,${height - margin.bottom})`).call(
           d3
             .axisBottom(xScale)
@@ -59,7 +59,7 @@ const Cfd = <Layer extends string>(props: PropsWithChildren<Props<Layer>>) => {
             .tickSizeOuter(0)
         )
 
-      const yAxis = (g: d3.Selection<SVGGElement, unknown, null, undefined>) =>
+      const yAxis = (g: d3.Selection<SVGGElement, unknown, HTMLElement, never>) =>
         g.attr('transform', `translate(${margin.left},0)`).call(d3.axisLeft(yScale))
 
       svg
@@ -103,7 +103,7 @@ const Cfd = <Layer extends string>(props: PropsWithChildren<Props<Layer>>) => {
         .attr('y1', 0)
         .attr('y2', height)
 
-      // Add an transparent element that's only about capturing mouse events
+      // Add a transparent element that's only about capturing mouse events
       svg
         .append('rect')
         .attr('fill', 'none')
@@ -144,7 +144,7 @@ const Cfd = <Layer extends string>(props: PropsWithChildren<Props<Layer>>) => {
               const datumCircle = datumCircles[di]
               datumCircle.attr('transform', `translate(${datumX},${datumY})`)
 
-              const lt = ltDatum[seriesDi.key]
+              const lt = ltDatum[seriesDi.key as Layer]
               const ltCircle = ltCircles[di]
               const ltLine = ltLines[di]
               if (lt !== undefined) {
